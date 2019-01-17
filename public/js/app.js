@@ -13,7 +13,7 @@ $(document).ready(function () {
 
                 var newATag = $("<a class='article-title'>");
                 newATag.attr("target", "_blank")
-                newATag.attr("href", `https://www.nytimes.com/${data[i].url}`)
+                newATag.attr("href", `https://www.nytimes.com${data[i].url}`)
                 newATag.text(data[i].headline)
 
                 panelTitle.append(newATag)
