@@ -1,0 +1,83 @@
+body { 
+    background: url("../images/white-waves.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .jumbotron{
+    background: url("../images/newspaper.jpg");
+  }
+  #wrapper {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5%;
+  }
+  
+  textarea, input {
+    display: block;
+    width: 100%;
+  }
+
+  input {
+    height: 36px;
+    font-size: 24px;
+  }
+  textarea {
+    height: 200px;
+    font-size: 18px;
+  }
+  
+  h1, h2{
+    color:lightblue;
+    text-align: center;
+  }
+  
+  .page-title{
+    margin-bottom: 25px;
+  }
+
+  .panel{
+    position: relative;
+    padding: 15px 10px;
+  }
+  
+  .save-button, .note-button{
+    position:absolute;
+    top:10px;
+    right: 20px;
+  }
+  
+  .delete-button{
+    position:absolute;
+    top:10px;
+    right: 140px;
+  }
+  
+  .article-title{
+    font-size:18px;
+  }
+  
+  #scrape-button{
+    padding:10px 20px;
+    margin-top:5px;
+    margin-bottom: 5px;
+    margin-left:20px;
+  }
+  
+  footer {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    margin: 0px;
+    text-align: center;
+    padding: 20px 0px 5px 0px;
+    background-color:grey;
+    color: #ffffff;
+    font-size: 10px;
+}
+  

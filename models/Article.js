@@ -7,12 +7,14 @@ var ArticleSchema = new Schema({
         required: true
     },
     summary: {
-        type: String,
-        required: true
+        type: String
     },
     url: {
-        type: String,
-        required: true
+        type: String
+    },
+    isSaved: {
+        type: Boolean,
+        default: false
     },
     note: {
         type: Schema.Types.ObjectId,

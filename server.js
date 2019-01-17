@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/newsScraper", { useNewUrlParser: true });
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
@@ -33,25 +33,23 @@ app.get("/scrape", function (req, res) {
     axios.get("https://www.nytimes.com/section/technology").then(function (response) {
         var $ = cheerio.load(response.data);
 
-        $("article").each(function (i, element) {
+        $("div.css-4jyr1y").each(function (i, element) {
             var result = {};
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = $(this)
-                .children("a")
-                .attr("href");
+            result.url = $(element).children("a").attr("href");
+            result.headline = $(element).children("a").children("h2.css-1dq8tca").text();
+            result.summary = $(element).children("a").children("p.css-1echdzn").text();
 
-            db.Article.create(result)
-                .then(function (dbArticle) {
-                    console.log(dbArticle);
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
+            if (result.headline && result.url) {
+                db.Article.create(result)
+                    .then(function (dbArticle) {
+                        console.log(dbArticle);
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+            }
         });
-
-        res.send("Scrape Complete");
+        res.sendFile(path.join(__dirname, "public/index.html"));
     });
 });
 
@@ -68,6 +66,16 @@ app.get("/articles", function (req, res) {
 app.get("/articles/:id", function (req, res) {
     db.Article.findOne({ _id: req.params.id })
         .populate("note")
+        .then(function (dbArticle) {
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+            res.json(err);
+        });
+});
+
+app.put("/articles/:id", function (req, res) {
+    db.Article.update({ _id: req.params.id }, { $set: { isSaved: true } })
         .then(function (dbArticle) {
             res.json(dbArticle);
         })
